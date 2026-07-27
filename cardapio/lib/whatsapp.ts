@@ -12,8 +12,21 @@ const deliveryLabels: Record<DeliveryMethod, string> = {
   retirada: "Retirada",
 };
 
+const deliveryEmojis: Record<DeliveryMethod, string> = {
+  delivery: "🛵",
+  retirada: "🏠",
+};
+
+const paymentEmojis: Record<PaymentMethod, string> = {
+  dinheiro: "💵",
+  cartao: "💳",
+  pix: "🔑",
+};
+
 const formatCurrency = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+const DIVIDER = "▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️▫️";
 
 export function buildOrderMessage(
   items: CartItem[],
@@ -25,38 +38,48 @@ export function buildOrderMessage(
 ) {
   const lines: string[] = [];
 
-  lines.push("*Novo pedido*");
-  lines.push("");
-  lines.push(`*Cliente:* ${customer.nome}`);
-  lines.push(`*WhatsApp:* ${customer.whatsapp}`);
+  lines.push("🍇 *AÇAÍ DO DS* 🍇");
+  lines.push("✅ *Novo pedido recebido!*");
+  lines.push(DIVIDER);
+
+  lines.push("👤 *DADOS DO CLIENTE*");
+  lines.push(`Nome: ${customer.nome}`);
+  lines.push(`📱 WhatsApp: ${customer.whatsapp}`);
   if (customer.email) {
-    lines.push(`*E-mail:* ${customer.email}`);
+    lines.push(`✉️ E-mail: ${customer.email}`);
   }
-  lines.push("");
-  lines.push("*Itens:*");
+  lines.push(DIVIDER);
+
+  lines.push("🛒 *ITENS DO PEDIDO*");
   for (const item of items) {
     lines.push(
-      `${item.quantity}x ${item.product.nome} - ${formatCurrency(item.product.preco * item.quantity)}`
+      `▪️ ${item.quantity}x ${item.product.nome} — ${formatCurrency(item.product.preco * item.quantity)}`
     );
   }
-  lines.push("");
-  lines.push(`*Total: ${formatCurrency(cartTotal(items))}*`);
-  lines.push("");
-  lines.push(`*Forma de entrega:* ${deliveryLabels[deliveryMethod]}`);
+  lines.push(`💰 *Total: ${formatCurrency(cartTotal(items))}*`);
+  lines.push(DIVIDER);
+
+  lines.push(`${deliveryEmojis[deliveryMethod]} *ENTREGA: ${deliveryLabels[deliveryMethod].toUpperCase()}*`);
   if (deliveryMethod === "delivery") {
     const { rua, numero, bairro, complemento, cidade } = customer.endereco;
-    lines.push(`Endereço: ${rua}, ${numero} - ${bairro}${complemento ? ` (${complemento})` : ""}`);
-    lines.push(`Cidade: ${cidade}`);
+    lines.push(`📍 ${rua}, ${numero} - ${bairro}${complemento ? ` (${complemento})` : ""}`);
+    lines.push(`🏙️ ${cidade}`);
   }
-  lines.push("");
-  lines.push(`*Forma de pagamento:* ${paymentLabels[paymentMethod]}`);
+  lines.push(DIVIDER);
+
+  lines.push(`${paymentEmojis[paymentMethod]} *PAGAMENTO: ${paymentLabels[paymentMethod].toUpperCase()}*`);
   if (paymentMethod === "dinheiro" && changeFor) {
-    lines.push(`Troco para: ${formatCurrency(changeFor)}`);
+    lines.push(`💸 Troco para: ${formatCurrency(changeFor)}`);
   }
+
   if (notes) {
-    lines.push("");
-    lines.push(`*Observações:* ${notes}`);
+    lines.push(DIVIDER);
+    lines.push("📝 *OBSERVAÇÕES*");
+    lines.push(notes);
   }
+
+  lines.push(DIVIDER);
+  lines.push("🙏 Obrigado pela preferência!");
 
   return lines.join("\n");
 }
