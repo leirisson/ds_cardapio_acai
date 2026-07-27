@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Açaí do DS - Menu Digital</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-fixed": "#b6f47c",
+                "surface-tint": "#824d72",
+                "surface-container-high": "#eae7e7",
+                "secondary-fixed-dim": "#9bd764",
+                "tertiary-container": "#2e2e2a",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#3d7100",
+                "surface-dim": "#dcd9d9",
+                "outline": "#81737a",
+                "surface-container-highest": "#e5e2e1",
+                "surface-container": "#f0eded",
+                "primary-fixed": "#ffd8ee",
+                "background": "#fcf9f8",
+                "inverse-primary": "#f5b3dd",
+                "secondary-container": "#b6f47c",
+                "primary-container": "#4b1d3f",
+                "on-secondary": "#ffffff",
+                "surface-bright": "#fcf9f8",
+                "surface-container-low": "#f6f3f2",
+                "on-primary-fixed": "#35092b",
+                "secondary": "#396a00",
+                "on-tertiary-fixed-variant": "#474742",
+                "on-surface-variant": "#4f434a",
+                "surface-container-lowest": "#ffffff",
+                "on-surface": "#1c1b1b",
+                "inverse-on-surface": "#f3f0ef",
+                "error-container": "#ffdad6",
+                "on-primary-fixed-variant": "#683659",
+                "tertiary": "#191915",
+                "tertiary-fixed-dim": "#c9c6c0",
+                "surface-variant": "#e5e2e1",
+                "on-tertiary-container": "#97958f",
+                "outline-variant": "#d3c2ca",
+                "on-primary-container": "#bf83ab",
+                "on-background": "#1c1b1b",
+                "on-secondary-fixed": "#0d2000",
+                "inverse-surface": "#313030",
+                "on-tertiary-fixed": "#1c1c18",
+                "on-secondary-fixed-variant": "#2a5000",
+                "primary-fixed-dim": "#f5b3dd",
+                "primary": "#320729",
+                "error": "#ba1a1a",
+                "surface": "#fcf9f8",
+                "on-primary": "#ffffff",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#e5e2db",
+                "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "unit": "8px",
+                "gutter": "24px",
+                "margin-desktop": "40px",
+                "container-max": "1280px",
+                "margin-mobile": "16px",
+                "card-gap": "24px"
+            },
+            "fontFamily": {
+                "display-lg": ["Playfair Display"],
+                "headline-lg": ["Plus Jakarta Sans"],
+                "body-lg": ["Plus Jakarta Sans"],
+                "label-md": ["Plus Jakarta Sans"],
+                "headline-lg-mobile": ["Plus Jakarta Sans"],
+                "headline-md": ["Plus Jakarta Sans"],
+                "body-md": ["Plus Jakarta Sans"],
+                "price-tag": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "price-tag": ["20px", {"lineHeight": "24px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .kraft-pattern {
+        background-color: #fcf9f8;
+        background-image: 
+            radial-gradient(#d3c2ca 0.5px, transparent 0.5px),
+            linear-gradient(to bottom, rgba(252, 249, 248, 0.9), rgba(252, 249, 248, 0.95));
+        background-size: 20px 20px, 100% 100%;
+      }
+      .leaf-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.05;
+        background-image: url('https://www.transparenttextures.com/patterns/leaf.png');
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #81737a;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="kraft-pattern font-body-md text-on-surface flex flex-col min-h-screen">
+<div class="leaf-overlay"></div>
+<!-- Top Bar -->
+<header class="w-full top-0 sticky z-40 bg-surface shadow-[0px_4px_20px_rgba(50,7,41,0.05)]">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max mx-auto">
+<button class="md:hidden text-primary p-2 hover:bg-surface-container-high rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<img alt="Açaí do DS" class="h-10 w-10 md:h-12 md:w-12 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOtFsqXoQ6UPLM2IR1yJogX4n994RK5sTmFgEvSXn6NsHVZ_nkd8pAL58FM2W3EWf18qx6uYXxeB0XpxCqGRaLe-k77Iyy63HxuX4HWrofTVXSgqZNG6y62_ZM5SPWg65SOaBJME0SpG3qgjT9KOb0PGxxILGhKH13em5Ed4Vjj07r6CIhfwVglDFhoaZnCJyyXR_aVsIs4QGLdjk8R4mU9FNQc5BnJI2ePciXTAQvhxzx6snPHQkMeYgmZLsSkF4qGUlRDJTTmPnE"/>
+<span class="hidden md:block font-display-lg text-primary tracking-tight" style="font-size: 28px;">Açaí do DS</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group cursor-pointer" onclick="document.getElementById('cart-sidebar').classList.toggle('translate-x-full')">
+<span class="material-symbols-outlined text-primary text-3xl">shopping_basket</span>
+<span class="absolute -top-1 -right-1 bg-secondary text-on-secondary text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-surface">2</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-1 max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop gap-gutter relative z-10 py-6">
+<!-- Main Content Area -->
+<div class="flex-1">
+<!-- Category Bar -->
+<nav class="flex gap-4 mb-8 overflow-x-auto pb-4 scrollbar-hide">
+<button class="flex items-center gap-2 px-6 py-3 bg-secondary-container text-on-secondary-container rounded-full font-bold shadow-sm whitespace-nowrap active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_drink</span>
+                    COPOS
+                </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined">set_meal</span>
+                    BARCAS
+                </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined">layers</span>
+                    POTES
+                </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full font-semibold transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined">request_quote</span>
+                    ROLETAS
+                </button>
+</nav>
+<!-- Product List (Vertical Layout as Requested) -->
+<div class="flex flex-col gap-6 max-w-4xl">
+<!-- Item 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex flex-col md:flex-row gap-6 shadow-[0px_4px_20px_rgba(50,7,41,0.05)] border border-surface-variant group hover:shadow-md transition-shadow">
+<div class="w-full md:w-48 h-48 overflow-hidden rounded-lg bg-surface-container-low shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A professional food photography shot of a 300ml clear plastic cup filled with dark purple, frozen açaí pulp. The cup is garnished with fresh sliced bananas and crunchy granola on top, set against a light wood artisanal background with soft, natural morning light casting gentle shadows. The colors are vibrant and emphasize the fresh-to-table organic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn25cG6X9nf21WlxXNRVxec2UiOoUZdADAnm2AVRObc4YgKS6exCdY641mW55d0QDvbLmKuRL4wbDmwd4iHKFupejV1jQ10v7-Mpv7SnyDu3-oSXlc9FWftpgaqrBCcyWgBM945U3ehwaoXoFwNF98KTOONxc2wvWh7QLR8oLUwBDEeJKwzlG5rcEXy9_540aXOB2jWp3NkFsB2fWFKIENf0CdA-4iovm8il4hE8XlLsJqpEoU1c3Fot370wZNR7p88KOox72CLVHG"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-primary">Copo 300ml</h3>
+<div class="text-right">
+<div class="text-secondary font-price-tag text-price-tag">R$10,00 <span class="text-xs text-on-surface-variant font-normal">(Açaí)</span></div>
+<div class="text-secondary font-price-tag text-price-tag">R$11,00 <span class="text-xs text-on-surface-variant font-normal">(+ Mix)</span></div>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                2 acomp. e 1 calda
+                            </p>
+</div>
+<button class="bg-primary text-on-primary w-full md:w-max px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+                            + Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex flex-col md:flex-row gap-6 shadow-[0px_4px_20px_rgba(50,7,41,0.05)] border border-surface-variant group hover:shadow-md transition-shadow">
+<div class="w-full md:w-48 h-48 overflow-hidden rounded-lg bg-surface-container-low shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A premium 400ml cup of rich, creamy Brazilian açaí topped with layers of condensed milk and strawberry slices. The plastic cup shows condensation, indicating cold freshness. It is positioned on a rustic wooden table with scattered açaí berries and green leaves around it. High contrast lighting highlights the smooth texture of the fruit pulp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtlEuBsQ5WHste-x_Lnz0AyHvo8db3VUB7vUqt1Q8xDWJnszYCPEB5h0K-kxPcH54TCJ9F39Ox7HWIqCm-cb9mx38oGelckBEV85fi-vl3LXojpQzgs2zmEsT7x0X3F9D5LIBNngV7hFXKVsuww-UbKfjUVUFE3_JJuWtV1eLXqoqAEs62xG50fK5WVPmXOug0uw0qtFdhCUsDHCaJRhnLOcGTBTvcStpNRRbMaAj95HM0YjCxZdGcvREmtpGDKcvG33kMwiKV_Nnl"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-primary">Copo 400ml</h3>
+<div class="text-right">
+<div class="text-secondary font-price-tag text-price-tag">R$13,00 <span class="text-xs text-on-surface-variant font-normal">(Açaí)</span></div>
+<div class="text-secondary font-price-tag text-price-tag">R$14,50 <span class="text-xs text-on-surface-variant font-normal">(+ Mix)</span></div>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                3 acomp. e 1 calda
+                            </p>
+</div>
+<button class="bg-primary text-on-primary w-full md:w-max px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+                            + Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex flex-col md:flex-row gap-6 shadow-[0px_4px_20px_rgba(50,7,41,0.05)] border border-surface-variant group hover:shadow-md transition-shadow">
+<div class="w-full md:w-48 h-48 overflow-hidden rounded-lg bg-surface-container-low shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A large 500ml clear cup overflowing with deep purple açaí sorbet, artistic swirls of peanut butter, and granola clusters. The image is taken from a slightly low angle to emphasize volume. The setting is a bright, modern cafe with organic textures and a clean, fresh-to-table atmosphere. Soft bokeh in the background shows greenery and wood accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhVl65xUIv_YpSUo7-wJ7FA-XBrnycLPxWIpxH2ej4OaIJJz23BJ-1Uwuz-p1LI64JndkIwm1hfPlaJId8UHOVwKuGLzcarsQgGdwVB8o80op9jP7qVKTLmqkI5rx5YMrcMuJ45BtjAv6PYFd7v1kbNL8il0mGfoh9PdFnkXykKKL4zjXJyH97f6XvVES25znn_ZVvs0XBvSH2Oj51sdcjzZdJ775-6Rp3MXaIKgLkwapALv228tW25uOOVCrNLCvbtCH5zYZw9oTX"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-primary">Copo 500ml</h3>
+<div class="text-right">
+<div class="text-secondary font-price-tag text-price-tag">R$15,00 <span class="text-xs text-on-surface-variant font-normal">(Açaí)</span></div>
+<div class="text-secondary font-price-tag text-price-tag">R$16,50 <span class="text-xs text-on-surface-variant font-normal">(+ Mix)</span></div>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                3 acomp. e 2 caldas
+                            </p>
+</div>
+<button class="bg-primary text-on-primary w-full md:w-max px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+                            + Add to Cart
+                        </button>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="bg-surface-container-lowest p-4 rounded-xl flex flex-col md:flex-row gap-6 shadow-[0px_4px_20px_rgba(50,7,41,0.05)] border border-surface-variant group hover:shadow-md transition-shadow">
+<div class="w-full md:w-48 h-48 overflow-hidden rounded-lg bg-surface-container-low shrink-0">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="A massive 700ml açaí cup, lavishly decorated with powdered milk, honey drizzle, and fresh kiwi slices. The lighting is crisp and energetic, highlighting the deep purple of the fruit pulp. The artisanal healthy food styling includes subtle wood grain patterns in the background and a few stray mint leaves for a touch of organic green color." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-BHFH9Opz96IorXLBqcjaKL56BUhX0R1WEZdMRDGfDzcmV53ikJVb72wFp3u3HoKZIkDZmbacwwFJvGTfNJ_DlieQjmzEiz3lyLpBieCJ1T5e1lhuPBphnSmEy1mUK0fPX5YM1Hu-5_AbxUY5EgsgqDrhmzEyCgd9L8O9RZc1i8jnJJRvG21T8oHLq_X_iyXM5CyTdrNrZfWCaPN4IJT6RWl6h0GZV7NSe9zNmTqYmVeyoLFSvYb4nfMlq6u0N3AadEWHPv2jTvIo"/>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-primary">Copo 700ml</h3>
+<div class="text-right">
+<div class="text-secondary font-price-tag text-price-tag">R$20,00 <span class="text-xs text-on-surface-variant font-normal">(Açaí)</span></div>
+<div class="text-secondary font-price-tag text-price-tag">R$22,00 <span class="text-xs text-on-surface-variant font-normal">(+ Mix)</span></div>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                                4 acomp. e 2 caldas
+                            </p>
+</div>
+<button class="bg-primary text-on-primary w-full md:w-max px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-xl">add_shopping_cart</span>
+                            + Add to Cart
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Cart Sidebar (Persistent Desktop, Slide-over Mobile) -->
+<aside class="fixed top-0 right-0 h-full w-[340px] bg-surface-container-lowest shadow-2xl z-50 transform transition-transform duration-300 md:translate-x-0 translate-x-full md:sticky md:top-24 md:h-[calc(100vh-120px)] md:rounded-xl md:border md:border-surface-variant" id="cart-sidebar">
+<div class="flex flex-col h-full p-gutter">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-primary">Seu Carrinho</h2>
+<button class="md:hidden text-primary" onclick="document.getElementById('cart-sidebar').classList.add('translate-x-full')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-4">
+<div class="flex items-center gap-3 py-3 border-b border-surface-variant group">
+<div class="w-12 h-12 bg-surface-container rounded-md shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of a 500ml açaí cup, showing the rich purple texture and granola topping." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYYwlzROp136o4yJCB-shdbKjoDeTBfCm9643uSy5esRLcUZUDtRHQlbsF9X8R0RM1xDpdhgaGEIsOmgPY93cBe14WVWLPnB4uR2UrH76rCrOraP7Xebj1_LfvOeD1KDRK2M9VYZ_pz2SnuRkF2QF--D23GMH8ByoelMihHmrf6lzE5a0rGn2h1HIwtXMEJ8Vx04sDYyNWkXJYsEaegp422jBcHvSMXiTe8X4e4wHLFeCwtIkHxoEPkWIaacOgxxWVPUR_W_LboUE-"/>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">Copo 500ml x 1</p>
+<p class="text-secondary font-bold">R$15,00</p>
+</div>
+<button class="text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+<div class="flex items-center gap-3 py-3 border-b border-surface-variant group">
+<div class="w-12 h-12 bg-surface-container rounded-md shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up of a 300ml açaí cup, vibrant purple fruit pulp." src="https://lh3.googleusercontent.com/aida-public/AB6AXuClhfl-7xkLOMo3zKgVmOo3JvcFjVxzK3vpkKqelct0bIFnx192_w4bTNti4BI7WbyFWmAKqLnJ1v5JlpGaw-rBS5BynT7XrWY7xQEefyQF_XlWEKsDHneqHlOR2_rfKlzt8Wy4s6DDvqtldRI_bmyPTr3aaiawlw6h60Mh-_Af_ydqgX76OPBaVb6t_DTioIvSZen4FPuPr4w4--ztHJHkywRF3UEtWbJkNpEUqpppuu6gjubaILTHHNiOTMwMYAYszopAwhl2OldB"/>
+</div>
+<div class="flex-1">
+<p class="font-label-md text-on-surface">Copo 300ml x 1</p>
+<p class="text-secondary font-bold">R$10,00</p>
+</div>
+<button class="text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<div class="mt-6 space-y-4">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Cupom de Desconto</label>
+<div class="flex gap-2">
+<input class="flex-1 bg-surface-container-low border-outline-variant rounded-lg px-4 py-2 focus:ring-primary focus:border-primary text-sm" placeholder="Digite seu código" type="text"/>
+<button class="bg-outline text-white px-4 py-2 rounded-lg text-sm font-bold">Aplicar</button>
+</div>
+</div>
+<div class="pt-4 border-t border-surface-variant">
+<div class="flex justify-between items-center mb-4">
+<span class="font-body-lg text-on-surface">Total</span>
+<span class="font-display-lg text-secondary" style="font-size: 24px;">R$25,00</span>
+</div>
+<button class="w-full bg-secondary text-on-secondary py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-on-secondary-fixed-variant transition-colors active:scale-95 shadow-lg">
+                            Finalizar Compra (Checkout)
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto bg-tertiary-container dark:bg-tertiary">
+<div class="flex flex-col md:flex-row justify-between items-start px-margin-mobile md:px-margin-desktop py-12 max-w-container-max mx-auto gap-12 md:gap-gutter">
+<div class="max-w-xs">
+<div class="flex items-center gap-2 mb-4">
+<img alt="Açaí do DS" class="h-8 w-8 grayscale brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOtFsqXoQ6UPLM2IR1yJogX4n994RK5sTmFgEvSXn6NsHVZ_nkd8pAL58FM2W3EWf18qx6uYXxeB0XpxCqGRaLe-k77Iyy63HxuX4HWrofTVXSgqZNG6y62_ZM5SPWg65SOaBJME0SpG3qgjT9KOb0PGxxILGhKH13em5Ed4Vjj07r6CIhfwVglDFhoaZnCJyyXR_aVsIs4QGLdjk8R4mU9FNQc5BnJI2ePciXTAQvhxzx6snPHQkMeYgmZLsSkF4qGUlRDJTTmPnE"/>
+<span class="font-headline-md text-secondary-fixed">Açaí do DS</span>
+</div>
+<p class="text-on-tertiary-fixed-variant font-body-md mb-6">
+                    O autêntico sabor da Amazônia servido com carinho e qualidade artesanal para energizar o seu dia.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-on-tertiary-container flex items-center justify-center text-on-tertiary-container hover:text-secondary-fixed hover:border-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-on-tertiary-container flex items-center justify-center text-on-tertiary-container hover:text-secondary-fixed hover:border-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-x-12 gap-y-4">
+<div class="flex flex-col gap-3">
+<h4 class="text-secondary-fixed font-bold text-sm uppercase tracking-widest mb-2">Explore</h4>
+<a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-colors font-body-md" href="#">Início</a>
+<a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-colors font-body-md" href="#">Nosso Açaí</a>
+<a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-colors font-body-md" href="#">Sobre Nós</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-secondary-fixed font-bold text-sm uppercase tracking-widest mb-2">Suporte</h4>
+<a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-colors font-body-md" href="#">Cardápio</a>
+<a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-colors font-body-md" href="#">Localização</a>
+<a class="text-on-tertiary-fixed-variant hover:text-secondary-fixed transition-colors font-body-md" href="#">Contato</a>
+</div>
+</div>
+<div class="bg-tertiary p-6 rounded-2xl w-full md:w-auto border border-tertiary-fixed-dim/10">
+<h4 class="text-white font-bold mb-2">Horário de Funcionamento</h4>
+<p class="text-on-tertiary-fixed-variant text-sm mb-1">Segunda a Sábado: 11h às 22h</p>
+<p class="text-on-tertiary-fixed-variant text-sm">Domingo: 14h às 21h</p>
+<div class="mt-4 pt-4 border-t border-tertiary-fixed-dim/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-fixed">location_on</span>
+<span class="text-on-tertiary-fixed-variant text-xs">Rua dos Sabores, 123 - Centro</span>
+</div>
+</div>
+</div>
+<div class="border-t border-on-tertiary-container/10 px-margin-mobile md:px-margin-desktop py-6 max-w-container-max mx-auto text-center">
+<p class="text-on-tertiary-container text-xs">© 2024 Açaí do DS. Natural &amp; Fresh.</p>
+</div>
+</footer>
+<!-- Scripts for micro-interactions -->
+<script>
+        // Simple logic for category selection
+        const categoryButtons = document.querySelectorAll('nav button');
+        categoryButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryButtons.forEach(b => {
+                    b.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'font-bold');
+                    b.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+                });
+                btn.classList.add('bg-secondary-container', 'text-on-secondary-container', 'font-bold');
+                btn.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

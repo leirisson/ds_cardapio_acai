@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Playfair+Display:wght@700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        
+        .kraft-texture {
+            background-color: #fcf9f8;
+            background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d3c2ca;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#1c1c18",
+                        "on-primary-container": "#bf83ab",
+                        "secondary-container": "#b6f47c",
+                        "on-tertiary-fixed-variant": "#474742",
+                        "inverse-primary": "#f5b3dd",
+                        "on-surface": "#1c1b1b",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#2e2e2a",
+                        "surface-dim": "#dcd9d9",
+                        "on-tertiary-container": "#97958f",
+                        "error": "#ba1a1a",
+                        "on-background": "#1c1b1b",
+                        "primary-fixed": "#ffd8ee",
+                        "secondary": "#396a00",
+                        "background": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#0d2000",
+                        "inverse-surface": "#313030",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#2a5000",
+                        "surface-bright": "#fcf9f8",
+                        "on-error": "#ffffff",
+                        "outline": "#81737a",
+                        "on-primary-fixed-variant": "#683659",
+                        "primary": "#320729",
+                        "tertiary-fixed": "#e5e2db",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#35092b",
+                        "tertiary-fixed-dim": "#c9c6c0",
+                        "primary-container": "#4b1d3f",
+                        "surface-container-high": "#eae7e7",
+                        "outline-variant": "#d3c2ca",
+                        "secondary-fixed-dim": "#9bd764",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#824d72",
+                        "secondary-fixed": "#b6f47c",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-container": "#f0eded",
+                        "tertiary": "#191915",
+                        "surface-variant": "#e5e2e1",
+                        "surface": "#fcf9f8",
+                        "primary-fixed-dim": "#f5b3dd",
+                        "on-surface-variant": "#4f434a",
+                        "surface-container-low": "#f6f3f2",
+                        "on-secondary-container": "#3d7100",
+                        "inverse-on-surface": "#f3f0ef"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "unit": "8px",
+                        "card-gap": "24px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "price-tag": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "price-tag": ["20px", {"lineHeight": "24px", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="kraft-texture min-h-screen text-on-surface selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface/90 backdrop-blur-md shadow-sm z-[100] px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-colors active:scale-95 duration-200">menu</button>
+<h1 class="font-display-lg text-headline-lg-mobile md:text-headline-lg text-primary tracking-tight">Açaí do DS</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container-high p-2 rounded-full transition-colors active:scale-95 duration-200">shopping_basket</button>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-8 pb-32">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Selection & Forms -->
+<div class="lg:col-span-7 space-y-8">
+<!-- Delivery Method -->
+<section>
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">local_shipping</span>
+                        Forma de Entrega
+                    </h2>
+<div class="grid grid-cols-2 gap-4">
+<label class="relative flex flex-col items-center justify-center p-6 bg-surface border-2 border-outline-variant rounded-xl cursor-pointer hover:bg-surface-container-low transition-all active:scale-[0.98] has-[:checked]:border-secondary-container has-[:checked]:bg-secondary-container/10 group">
+<input checked="" class="sr-only" name="delivery_method" type="radio"/>
+<span class="material-symbols-outlined text-4xl mb-2 text-on-surface-variant group-has-[:checked]:text-secondary">delivery_dining</span>
+<span class="font-label-md text-label-md">Delivery</span>
+</label>
+<label class="relative flex flex-col items-center justify-center p-6 bg-surface border-2 border-outline-variant rounded-xl cursor-pointer hover:bg-surface-container-low transition-all active:scale-[0.98] has-[:checked]:border-secondary-container has-[:checked]:bg-secondary-container/10 group">
+<input class="sr-only" name="delivery_method" type="radio"/>
+<span class="material-symbols-outlined text-4xl mb-2 text-on-surface-variant group-has-[:checked]:text-secondary">store</span>
+<span class="font-label-md text-label-md">Retirada</span>
+</label>
+</div>
+</section>
+<!-- Payment Method -->
+<section>
+<h2 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">payments</span>
+                        Pagamento
+                    </h2>
+<div class="space-y-3">
+<label class="flex items-center p-4 bg-surface rounded-xl shadow-[0_4px_20px_rgba(50,7,41,0.05)] border border-transparent has-[:checked]:border-secondary-container cursor-pointer transition-all group">
+<input checked="" class="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary" name="payment_method" type="radio"/>
+<span class="ml-4 material-symbols-outlined text-on-surface-variant">credit_card</span>
+<span class="ml-3 font-body-md text-body-md flex-1">Cartão de Crédito</span>
+</label>
+<label class="flex items-center p-4 bg-surface rounded-xl shadow-[0_4px_20px_rgba(50,7,41,0.05)] border border-transparent has-[:checked]:border-secondary-container cursor-pointer transition-all group">
+<input class="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary" name="payment_method" type="radio"/>
+<span class="ml-4 material-symbols-outlined text-on-surface-variant">qr_code_2</span>
+<span class="ml-3 font-body-md text-body-md flex-1">Pix</span>
+</label>
+<label class="flex items-center p-4 bg-surface rounded-xl shadow-[0_4px_20px_rgba(50,7,41,0.05)] border border-transparent has-[:checked]:border-secondary-container cursor-pointer transition-all group">
+<input class="w-5 h-5 text-secondary border-outline-variant focus:ring-secondary" name="payment_method" type="radio"/>
+<span class="ml-4 material-symbols-outlined text-on-surface-variant">payments</span>
+<span class="ml-3 font-body-md text-body-md flex-1">Dinheiro</span>
+</label>
+</div>
+</section>
+<!-- Additional Info -->
+<section>
+<h2 class="font-headline-md text-headline-md text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">sticky_note_2</span>
+                        Observações
+                    </h2>
+<textarea class="w-full h-32 bg-surface border border-outline-variant rounded-xl p-4 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all font-body-md text-body-md outline-none" placeholder="Ex: Retirar granola, mandar colher extra..."></textarea>
+</section>
+</div>
+<!-- Right Column: Order Summary (Sidebar style) -->
+<aside class="lg:col-span-5 sticky top-24">
+<div class="bg-surface rounded-2xl shadow-[0_4px_20px_rgba(50,7,41,0.05)] overflow-hidden border border-surface-container-highest">
+<div class="p-6 bg-primary text-on-primary">
+<h2 class="font-headline-md text-headline-md">Resumo do Pedido</h2>
+</div>
+<div class="p-6 space-y-6">
+<!-- Items List -->
+<div class="space-y-4 max-h-64 overflow-y-auto custom-scrollbar pr-2">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center shrink-0" data-alt="A lush, vibrant açaí bowl overflowed with fresh sliced strawberries and chunks of ripe banana, sprinkled with golden granola and a drizzle of honey. The lighting is soft and natural, emphasizing the deep, rich purple texture of the frozen fruit. The setting is a rustic tabletop with organic elements like wood and leaves, reflecting a premium health-food aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDoHX40qBndhwtJUulE5lbxoJ8VkZG5qKcpv-cmjVR-6vA28DXnNhYSqhv9HGY_SJu--_RwGY3jy7AD89K3Mw9rffQSuduS5yAlDktHvgHn3fpW2rzUlQuRx3Tw1BVuQJn1CuaOFNUqCS4xIMocQMC3FlHHDkBT25ghvUpZ_396xNuKkIwG6RSYnuQjblHqhZgD0XS3haSegnWgSPIS1LwxJCuamT2G-cBm06U7ILUzGmHHiK6Sp7M3aXL7WxgjkcbZTPmhUgha6CfA')"></div>
+<div class="flex-1">
+<h3 class="font-body-md text-body-md font-bold text-primary">Copo 500ml</h3>
+<p class="text-on-surface-variant text-sm">Quantidade: 1</p>
+</div>
+<span class="font-price-tag text-price-tag text-secondary">R$ 15,00</span>
+</div>
+<hr class="border-surface-container-highest"/>
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-lg bg-cover bg-center shrink-0" data-alt="A smaller serving of dark purple, artisanal açaí in a clean white cup, topped with a vibrant green mint leaf and a few blueberries. The background is a crisp, minimalist white with subtle textures suggesting a high-end urban cafe. The image conveys energy and cleanliness, with sharp focus and bright, airy lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCMTUOUXXyjvUxCb9EEG6JXYhgTmC383UfkxOurnuPBGQfBREaAXpt6TtiMnzLxYkXTEoQlr-TSNKmwLkORH_6Y_sFz2GiTqcAsGGRdcVZPzYE89_1gJ3W55BlHSdB9PcWvbXJpg_VFtEifj1tF1DUvBNUdaSPK-3w2qIwPfgvjR2oFF6Qb4xC6wiyFjcO--lJutpyc0BmgEzll4UxqgRh6WSg5OHYhyyScgYKzk4uaWVUSL1L63_C-DHDuTb7eg3PiyxjnoT8Y6G-k')"></div>
+<div class="flex-1">
+<h3 class="font-body-md text-body-md font-bold text-primary">Copo 300ml</h3>
+<p class="text-on-surface-variant text-sm">Quantidade: 1</p>
+</div>
+<span class="font-price-tag text-price-tag text-secondary">R$ 10,00</span>
+</div>
+</div>
+<!-- Price Breakdown -->
+<div class="space-y-2 pt-4 border-t border-surface-container-highest">
+<div class="flex justify-between text-on-surface-variant font-body-md">
+<span>Subtotal</span>
+<span>R$ 25,00</span>
+</div>
+<div class="flex justify-between text-on-surface-variant font-body-md">
+<span>Taxa de Entrega</span>
+<span>R$ 5,00</span>
+</div>
+<div class="flex justify-between items-center pt-4 mt-2 border-t border-dashed border-outline-variant">
+<span class="font-headline-md text-headline-md text-primary">Total</span>
+<span class="font-display-lg text-headline-lg text-secondary">R$ 30,00</span>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 bg-secondary text-on-secondary rounded-xl font-headline-md text-headline-md shadow-lg hover:shadow-xl hover:bg-secondary/90 transition-all active:scale-95 duration-150 flex items-center justify-center gap-2 group">
+<span>Finalizar Pedido</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<p class="text-center text-on-surface-variant font-label-md text-xs">
+                            Ao finalizar, você concorda com nossos Termos de Uso.
+                        </p>
+</div>
+</div>
+<!-- Promotional Banner Bento-style -->
+<div class="mt-6 p-4 bg-secondary-container/30 rounded-2xl border border-secondary-container flex items-center gap-4">
+<div class="bg-secondary p-2 rounded-full shrink-0">
+<span class="material-symbols-outlined text-white text-xl">loyalty</span>
+</div>
+<div>
+<p class="font-label-md text-on-secondary-container font-bold">Você ganhou 10 pontos!</p>
+<p class="text-xs text-on-secondary-container/80">Continue pedindo para ganhar um copo grátis.</p>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Mobile only focus check) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 pb-6 bg-surface shadow-[0_-4px_20px_rgba(50,7,41,0.05)] rounded-t-xl z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-all active:scale-90 duration-150 px-4 py-1">
+<span class="material-symbols-outlined">restaurant_menu</span>
+<span class="font-label-md text-label-md">Menu</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-label-md text-label-md">Cart</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-all active:scale-90 duration-150 px-4 py-1">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Orders</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container transition-all active:scale-90 duration-150 px-4 py-1">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple Interaction Logic
+        document.querySelectorAll('input[name="delivery_method"]').forEach(input => {
+            input.addEventListener('change', function() {
+                // Potential for dynamic delivery fee update logic here
+                const deliveryFee = this.parentElement.innerText.includes('Delivery') ? 5 : 0;
+                console.log('Update delivery fee logic:', deliveryFee);
+            });
+        });
+
+        // Add a micro-ripple effect to primary button
+        const mainBtn = document.querySelector('button.bg-secondary');
+        mainBtn.addEventListener('click', function(e) {
+            let ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            this.appendChild(ripple);
+            let x = e.clientX - e.target.offsetLeft;
+            let y = e.clientY - e.target.offsetTop;
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            setTimeout(() => ripple.remove(), 600);
+        });
+    </script>
+<style>
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            border-radius: 50%;
+            animation: ripple-animation 0.6s linear;
+        }
+        @keyframes ripple-animation {
+            from { width: 0; height: 0; opacity: 1; }
+            to { width: 400px; height: 400px; opacity: 0; }
+        }
+    </style>
+</body></html>
