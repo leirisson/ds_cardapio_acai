@@ -213,26 +213,38 @@ export function CheckoutForm({ items, onSubmit, onBack }: CheckoutFormProps) {
           </div>
           <div className="space-y-6 p-6">
             <div className="max-h-64 space-y-4 overflow-y-auto custom-scrollbar pr-2">
-              {items.map((item) => (
-                <div key={item.product.id} className="flex items-center gap-4">
-                  <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-surface-container">
-                    <Image
-                      src={item.product.imagem}
-                      alt={item.product.nome}
-                      width={64}
-                      height={64}
-                      className="h-full w-full object-cover"
-                    />
+              {items.map((item) => {
+                const selectionSummary = [
+                  ...item.selection.acompanhamentos,
+                  item.selection.calda,
+                  item.selection.fruta,
+                ]
+                  .filter(Boolean)
+                  .join(", ");
+                return (
+                  <div key={item.cartItemId} className="flex items-center gap-4">
+                    <div className="h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-surface-container">
+                      <Image
+                        src={item.product.imagem}
+                        alt={item.product.nome}
+                        width={64}
+                        height={64}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-primary">{item.product.nome}</h3>
+                      {selectionSummary && (
+                        <p className="text-xs text-on-surface-variant">{selectionSummary}</p>
+                      )}
+                      <p className="text-sm text-on-surface-variant">Quantidade: {item.quantity}</p>
+                    </div>
+                    <span className="font-bold text-secondary">
+                      {formatCurrency(item.product.preco * item.quantity)}
+                    </span>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-primary">{item.product.nome}</h3>
-                    <p className="text-sm text-on-surface-variant">Quantidade: {item.quantity}</p>
-                  </div>
-                  <span className="font-bold text-secondary">
-                    {formatCurrency(item.product.preco * item.quantity)}
-                  </span>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="space-y-2 border-t border-surface-container-highest pt-4">

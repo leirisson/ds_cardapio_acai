@@ -48,6 +48,15 @@ export function buildOrderMessage(
     lines.push(
       `${item.quantity}x ${item.product.nome} - ${formatCurrency(item.product.preco * item.quantity)}`
     );
+    if (item.selection.acompanhamentos.length > 0) {
+      lines.push(`  Acompanhamentos: ${item.selection.acompanhamentos.join(", ")}`);
+    }
+    if (item.selection.calda) {
+      lines.push(`  Calda: ${item.selection.calda}`);
+    }
+    if (item.selection.fruta) {
+      lines.push(`  Fruta: ${item.selection.fruta}`);
+    }
   }
   lines.push(DIVIDER);
   lines.push(`*Total: ${formatCurrency(cartTotal(items))}*`);

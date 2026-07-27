@@ -10,9 +10,17 @@ export type Product = {
   categoria: Category;
 };
 
+export type ProductSelection = {
+  acompanhamentos: string[];
+  calda: string;
+  fruta: string;
+};
+
 export type CartItem = {
+  cartItemId: string;
   product: Product;
   quantity: number;
+  selection: ProductSelection;
 };
 
 export type PaymentMethod = "dinheiro" | "cartao" | "pix";

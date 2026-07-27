@@ -8,10 +8,11 @@ import { CustomerDataForm } from "../components/CustomerDataForm";
 import { CheckoutForm } from "../components/CheckoutForm";
 import { CategoryIcon } from "../components/CategoryIcon";
 import { BannerCarousel } from "../components/BannerCarousel";
+import { ProductOptionsModal } from "../components/ProductOptionsModal";
 import { categories, products } from "../lib/products";
 import { useCartStore } from "../lib/store/cart";
 import { buildOrderMessage, buildWhatsappLink } from "../lib/whatsapp";
-import { Category, Customer, DeliveryMethod, PaymentMethod } from "../lib/types";
+import { Category, Customer, DeliveryMethod, PaymentMethod, Product, ProductSelection } from "../lib/types";
 
 type Step = "cardapio" | "dados-cliente" | "checkout" | "confirmacao";
 
@@ -20,6 +21,7 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<Category>("Copos");
   const [cartOpen, setCartOpen] = useState(false);
   const [customer, setCustomer] = useState<Customer | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   const items = useCartStore((state) => state.items);
   const addItem = useCartStore((state) => state.addItem);
@@ -37,6 +39,11 @@ export default function Home() {
   const handleCustomerSubmit = (data: Customer) => {
     setCustomer(data);
     setStep("checkout");
+  };
+
+  const handleConfirmSelection = (selection: ProductSelection) => {
+    if (!selectedProduct) return;
+    addItem(selectedProduct, selection);
   };
 
   const handleOrderSubmit = (
@@ -149,7 +156,7 @@ export default function Home() {
 
               <div className="flex max-w-4xl flex-col gap-6">
                 {visibleProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} onAdd={addItem} />
+                  <ProductCard key={product.id} product={product} onAdd={setSelectedProduct} />
                 ))}
               </div>
             </div>
@@ -227,6 +234,14 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {selectedProduct && (
+        <ProductOptionsModal
+          product={selectedProduct}
+          onConfirm={handleConfirmSelection}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
 
       <footer className="mt-auto w-full bg-tertiary">
         <div className="mx-auto flex max-w-(--container-max) flex-col justify-between gap-12 px-4 py-12 md:flex-row md:px-10">

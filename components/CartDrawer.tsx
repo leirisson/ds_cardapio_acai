@@ -5,13 +5,18 @@ import { cartTotal } from "../lib/store/cart";
 
 type CartDrawerProps = {
   items: CartItem[];
-  onUpdateQuantity: (productId: string, quantity: number) => void;
-  onRemove: (productId: string) => void;
+  onUpdateQuantity: (cartItemId: string, quantity: number) => void;
+  onRemove: (cartItemId: string) => void;
   onCheckout: () => void;
 };
 
 const formatCurrency = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+const selectionSummary = (item: CartItem) =>
+  [...item.selection.acompanhamentos, item.selection.calda, item.selection.fruta]
+    .filter(Boolean)
+    .join(", ");
 
 export function CartDrawer({ items, onUpdateQuantity, onRemove, onCheckout }: CartDrawerProps) {
   const total = cartTotal(items);
@@ -25,11 +30,11 @@ export function CartDrawer({ items, onUpdateQuantity, onRemove, onCheckout }: Ca
           Seu carrinho está vazio.
         </p>
       ) : (
-        <ul className="flex max-h-80 flex-col gap-1 overflow-y-auto custom-scrollbar pr-1">
+        <ul className="flex max-h-96 flex-col gap-1 overflow-y-auto custom-scrollbar pr-1">
           {items.map((item) => (
             <li
-              key={item.product.id}
-              className="group flex items-center gap-3 border-b border-surface-container-highest py-3 last:border-b-0"
+              key={item.cartItemId}
+              className="group flex items-start gap-3 border-b border-surface-container-highest py-3 last:border-b-0"
             >
               <div className="h-12 w-12 shrink-0 overflow-hidden rounded-md bg-surface-container">
                 <Image
@@ -42,10 +47,13 @@ export function CartDrawer({ items, onUpdateQuantity, onRemove, onCheckout }: Ca
               </div>
               <div className="flex-1">
                 <p className="text-sm font-semibold text-on-surface">{item.product.nome}</p>
+                {selectionSummary(item) && (
+                  <p className="mt-0.5 text-xs text-on-surface-variant">{selectionSummary(item)}</p>
+                )}
                 <div className="mt-1 flex items-center gap-2">
                   <button
                     type="button"
-                    onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
+                    onClick={() => onUpdateQuantity(item.cartItemId, item.quantity - 1)}
                     className="flex h-5 w-5 items-center justify-center rounded-full bg-surface-container-high text-xs text-on-surface-variant hover:bg-surface-container-highest"
                     aria-label="Diminuir quantidade"
                   >
@@ -56,7 +64,7 @@ export function CartDrawer({ items, onUpdateQuantity, onRemove, onCheckout }: Ca
                   </span>
                   <button
                     type="button"
-                    onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
+                    onClick={() => onUpdateQuantity(item.cartItemId, item.quantity + 1)}
                     className="flex h-5 w-5 items-center justify-center rounded-full bg-surface-container-high text-xs text-on-surface-variant hover:bg-surface-container-highest"
                     aria-label="Aumentar quantidade"
                   >
@@ -70,7 +78,7 @@ export function CartDrawer({ items, onUpdateQuantity, onRemove, onCheckout }: Ca
                 </span>
                 <button
                   type="button"
-                  onClick={() => onRemove(item.product.id)}
+                  onClick={() => onRemove(item.cartItemId)}
                   className="text-outline transition-colors hover:text-error"
                   aria-label="Remover item"
                 >
