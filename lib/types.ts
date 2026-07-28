@@ -11,6 +11,7 @@ export type Product = {
 };
 
 export type ProductSelection = {
+  sabor: string;
   acompanhamentos: string[];
   calda: string;
   fruta: string;

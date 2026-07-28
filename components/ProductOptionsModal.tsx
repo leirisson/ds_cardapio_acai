@@ -3,7 +3,14 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import { Product, ProductSelection } from "../lib/types";
-import { ACOMPANHAMENTOS, ACOMPANHAMENTOS_MAX, ACOMPANHAMENTOS_MIN, CALDAS, FRUTAS } from "../lib/options";
+import {
+  ACOMPANHAMENTOS,
+  ACOMPANHAMENTOS_MAX,
+  ACOMPANHAMENTOS_MIN,
+  CALDAS,
+  FRUTAS,
+  SABORES,
+} from "../lib/options";
 
 type ProductOptionsModalProps = {
   product: Product;
@@ -34,6 +41,7 @@ function RequiredBadge({ done }: { done: boolean }) {
 }
 
 export function ProductOptionsModal({ product, onConfirm, onClose }: ProductOptionsModalProps) {
+  const [sabor, setSabor] = useState<string>("");
   const [acompanhamentos, setAcompanhamentos] = useState<string[]>([]);
   const [calda, setCalda] = useState<string>("");
   const [fruta, setFruta] = useState<string>("");
@@ -53,14 +61,14 @@ export function ProductOptionsModal({ product, onConfirm, onClose }: ProductOpti
 
   const acompanhamentosValid =
     acompanhamentos.length >= ACOMPANHAMENTOS_MIN && acompanhamentos.length <= ACOMPANHAMENTOS_MAX;
-  const isValid = acompanhamentosValid && calda !== "" && fruta !== "";
+  const isValid = sabor !== "" && acompanhamentosValid && calda !== "" && fruta !== "";
 
   const totalPrice = useMemo(() => product.preco * quantity, [product.preco, quantity]);
 
   const handleConfirm = () => {
     if (!isValid) return;
     for (let i = 0; i < quantity; i++) {
-      onConfirm({ acompanhamentos, calda, fruta });
+      onConfirm({ sabor, acompanhamentos, calda, fruta });
     }
     onClose();
   };
@@ -105,6 +113,36 @@ export function ProductOptionsModal({ product, onConfirm, onClose }: ProductOpti
         </div>
 
         <div className="flex-1 overflow-y-auto custom-scrollbar">
+          <div className="flex items-center justify-between gap-3 bg-surface-container-low px-4 py-4">
+            <div>
+              <h3 className="font-bold text-on-surface">Sabor</h3>
+              <p className="text-sm text-on-surface-variant">Escolha 1 opção</p>
+            </div>
+            <RequiredBadge done={sabor !== ""} />
+          </div>
+          <ul>
+            {SABORES.map((item) => (
+              <li key={item} className="border-b border-surface-container-high last:border-b-0">
+                <button
+                  type="button"
+                  onClick={() => setSabor(item)}
+                  className="flex w-full items-center justify-between px-4 py-4 text-left transition-colors hover:bg-surface-container-low"
+                >
+                  <span className={sabor === item ? "font-semibold text-on-surface" : "text-on-surface"}>
+                    {item}
+                  </span>
+                  <span
+                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                      sabor === item ? "border-secondary" : "border-outline-variant"
+                    }`}
+                  >
+                    {sabor === item && <span className="h-2.5 w-2.5 rounded-full bg-secondary" />}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+
           <div className="flex items-center justify-between gap-3 bg-surface-container-low px-4 py-4">
             <div>
               <h3 className="font-bold text-on-surface">Acompanhamentos</h3>

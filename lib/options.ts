@@ -1,3 +1,11 @@
+export const SABORES = [
+  "Açaí",
+  "Cupuaçu",
+  "Maracujá",
+  "Mix de Açaí e Cupuaçu",
+  "Mix de Açaí e Maracujá",
+] as const;
+
 export const ACOMPANHAMENTOS = [
   "Farinha láctea",
   "Leite ninho",

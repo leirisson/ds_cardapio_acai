@@ -215,6 +215,7 @@ export function CheckoutForm({ items, onSubmit, onBack }: CheckoutFormProps) {
             <div className="max-h-64 space-y-4 overflow-y-auto custom-scrollbar pr-2">
               {items.map((item) => {
                 const selectionSummary = [
+                  item.selection.sabor,
                   ...item.selection.acompanhamentos,
                   item.selection.calda,
                   item.selection.fruta,

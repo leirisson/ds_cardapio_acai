@@ -48,6 +48,9 @@ export function buildOrderMessage(
     lines.push(
       `${item.quantity}x ${item.product.nome} - ${formatCurrency(item.product.preco * item.quantity)}`
     );
+    if (item.selection.sabor) {
+      lines.push(`  Sabor: ${item.selection.sabor}`);
+    }
     if (item.selection.acompanhamentos.length > 0) {
       lines.push(`  Acompanhamentos: ${item.selection.acompanhamentos.join(", ")}`);
     }

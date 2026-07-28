@@ -14,7 +14,7 @@ const formatCurrency = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 const selectionSummary = (item: CartItem) =>
-  [...item.selection.acompanhamentos, item.selection.calda, item.selection.fruta]
+  [item.selection.sabor, ...item.selection.acompanhamentos, item.selection.calda, item.selection.fruta]
     .filter(Boolean)
     .join(", ");
 
