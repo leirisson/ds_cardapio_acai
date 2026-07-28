@@ -29,7 +29,10 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${playfairDisplay.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
-      <body className="kraft-pattern min-h-full flex flex-col overflow-x-hidden text-on-surface">
+      <body
+        className="kraft-pattern min-h-full flex flex-col overflow-x-hidden text-on-surface"
+        suppressHydrationWarning
+      >
         {children}
       </body>
     </html>
