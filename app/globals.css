@@ -91,7 +91,7 @@
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
 
-  --container-max: 1280px;
+  --layout-max: 1280px;
 }
 
 body {

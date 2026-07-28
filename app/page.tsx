@@ -66,7 +66,7 @@ export default function Home() {
       <div className="leaf-overlay" />
 
       <header className="sticky top-0 z-40 w-full bg-surface shadow-[0px_4px_20px_rgba(50,7,41,0.05)]">
-        <div className="mx-auto grid max-w-(--container-max) grid-cols-[auto_1fr_auto] items-center gap-2 px-4 py-4 md:px-10">
+        <div className="mx-auto grid max-w-(--layout-max) grid-cols-[auto_1fr_auto] items-center gap-2 px-4 py-4 md:px-10">
           <Image
             src="/logo.png"
             alt="Açaí do DS"
@@ -107,7 +107,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto flex w-full max-w-(--container-max) flex-1 gap-6 overflow-x-hidden px-4 py-6 md:px-10">
+      <main className="relative z-10 mx-auto flex w-full max-w-(--layout-max) flex-1 gap-6 overflow-x-hidden px-4 py-6 md:px-10">
         {step === "cardapio" && (
           <>
             <div className="min-w-0 flex-1">
@@ -244,7 +244,7 @@ export default function Home() {
       )}
 
       <footer className="mt-auto w-full bg-tertiary">
-        <div className="mx-auto flex max-w-(--container-max) flex-col justify-between gap-12 px-4 py-12 md:flex-row md:px-10">
+        <div className="mx-auto flex max-w-(--layout-max) flex-col justify-between gap-12 px-4 py-12 md:flex-row md:px-10">
           <div className="max-w-xs">
             <div className="mb-4 flex items-center gap-2">
               <Image
@@ -271,7 +271,9 @@ export default function Home() {
                 </svg>
               </a>
               <a
-                href="#"
+                href="https://wa.me/5592993129862"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="WhatsApp"
                 className="flex h-10 w-10 items-center justify-center rounded-full border border-on-tertiary/25 text-on-tertiary/70 transition-colors hover:border-secondary-fixed hover:text-secondary-fixed"
               >
@@ -281,6 +283,27 @@ export default function Home() {
                     d="M18 10a8 8 0 11-15.2-3.5L2 18l11.6-.8A8 8 0 0018 10zM7.5 6.5c.3-.6.6-.6.9-.6h.5c.2 0 .4 0 .6.4.2.5.6 1.6.7 1.7.1.1.1.3 0 .5-.1.2-.2.3-.4.5-.1.2-.3.3-.1.6.2.4.9 1.4 1.9 2.3 1.3 1.1 2.3 1.4 2.7 1.6.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.9-.2 1.7-.3.8-1.6 1.5-2.3 1.6-.6.1-1.3.2-4.2-.9-3.5-1.4-5.7-4.9-5.9-5.1-.2-.3-1.4-1.9-1.4-3.6 0-1.7.9-2.5 1.2-2.9z"
                     clipRule="evenodd"
                   />
+                </svg>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/leirisson-souza/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-on-tertiary/25 text-on-tertiary/70 transition-colors hover:border-secondary-fixed hover:text-secondary-fixed"
+              >
+                <svg viewBox="0 0 20 20" fill="currentColor" className="h-4.5 w-4.5" aria-hidden>
+                  <path d="M3.5 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM2.25 7.75h2.5v9.5h-2.5v-9.5zM7.75 7.75h2.4v1.3h.03c.33-.63 1.15-1.3 2.37-1.3 2.53 0 3 1.66 3 3.83v5.67h-2.5v-5.03c0-1.2-.02-2.74-1.67-2.74-1.67 0-1.93 1.3-1.93 2.65v5.12h-2.5v-9.5z" />
+                </svg>
+              </a>
+              <a
+                href="mailto:Leirissonsouza99@gmail.com"
+                aria-label="E-mail"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-on-tertiary/25 text-on-tertiary/70 transition-colors hover:border-secondary-fixed hover:text-secondary-fixed"
+              >
+                <svg viewBox="0 0 20 20" fill="currentColor" className="h-4.5 w-4.5" aria-hidden>
+                  <path d="M2.5 4A1.5 1.5 0 001 5.5v.379l9 5.13 9-5.13V5.5A1.5 1.5 0 0017.5 4h-15z" />
+                  <path d="M19 7.472l-9 5.13-9-5.13V14.5A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5V7.472z" />
                 </svg>
               </a>
             </div>
@@ -327,7 +350,7 @@ export default function Home() {
                 Localização
               </a>
               <a
-                href="#"
+                href="mailto:Leirissonsouza99@gmail.com"
                 className="text-sm text-on-tertiary/60 transition-colors hover:text-secondary-fixed"
               >
                 Contato
@@ -357,8 +380,57 @@ export default function Home() {
           </div>
         </div>
         <div className="border-t border-on-tertiary/10 px-4 py-6 text-center text-xs text-on-tertiary/50 md:px-10">
-          © 2026 - Leirisson Sozua <br />
-          Telefone: 92993129862
+          <p>© 2026 - Leirisson Souza</p>
+          <p className="mt-2 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+            <a
+              href="https://wa.me/5592993129862"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 transition-colors hover:text-secondary-fixed"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5 shrink-0" aria-hidden>
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-15.2-3.5L2 18l11.6-.8A8 8 0 0018 10zM7.5 6.5c.3-.6.6-.6.9-.6h.5c.2 0 .4 0 .6.4.2.5.6 1.6.7 1.7.1.1.1.3 0 .5-.1.2-.2.3-.4.5-.1.2-.3.3-.1.6.2.4.9 1.4 1.9 2.3 1.3 1.1 2.3 1.4 2.7 1.6.3.1.5.1.7-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.6-.1.2.1 1.5.7 1.8.8.3.1.5.2.5.3.1.2.1.9-.2 1.7-.3.8-1.6 1.5-2.3 1.6-.6.1-1.3.2-4.2-.9-3.5-1.4-5.7-4.9-5.9-5.1-.2-.3-1.4-1.9-1.4-3.6 0-1.7.9-2.5 1.2-2.9z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              (92) 99312-9862
+            </a>
+            <a
+              href="mailto:Leirissonsouza99@gmail.com"
+              className="flex items-center gap-1.5 transition-colors hover:text-secondary-fixed"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5 shrink-0" aria-hidden>
+                <path d="M2.5 4A1.5 1.5 0 001 5.5v.379l9 5.13 9-5.13V5.5A1.5 1.5 0 0017.5 4h-15z" />
+                <path d="M19 7.472l-9 5.13-9-5.13V14.5A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5V7.472z" />
+              </svg>
+              Leirissonsouza99@gmail.com
+            </a>
+            <a
+              href="https://www.linkedin.com/in/leirisson-souza/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 transition-colors hover:text-secondary-fixed"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5 shrink-0" aria-hidden>
+                <path d="M3.5 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM2.25 7.75h2.5v9.5h-2.5v-9.5zM7.75 7.75h2.4v1.3h.03c.33-.63 1.15-1.3 2.37-1.3 2.53 0 3 1.66 3 3.83v5.67h-2.5v-5.03c0-1.2-.02-2.74-1.67-2.74-1.67 0-1.93 1.3-1.93 2.65v5.12h-2.5v-9.5z" />
+              </svg>
+              LinkedIn
+            </a>
+            <a
+              href="https://www.leirissonsouza.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 transition-colors hover:text-secondary-fixed"
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5 shrink-0" aria-hidden>
+                <path d="M12.232 4.232a2.5 2.5 0 013.536 3.536l-1.225 1.224a.75.75 0 001.061 1.06l1.224-1.224a4 4 0 00-5.656-5.656l-3 3a4 4 0 00.225 5.865.75.75 0 00.977-1.138 2.5 2.5 0 01-.142-3.667l3-3z" />
+                <path d="M11.603 7.603a.75.75 0 00-1.061 1.06 2.5 2.5 0 01.142 3.667l-3 3a2.5 2.5 0 01-3.536-3.535l1.225-1.224a.75.75 0 10-1.061-1.06L3.087 10.735a4 4 0 105.656 5.656l3-3a4 4 0 00-.225-5.865z" />
+              </svg>
+              Portfólio
+            </a>
+          </p>
         </div>
       </footer>
     </>

@@ -64,7 +64,7 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
         <button
           type="button"
           onClick={() => onAdd(product)}
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-8 py-3 font-bold text-on-primary transition-all hover:bg-primary-container hover:text-on-primary-container active:scale-95 sm:w-max"
+          className="flex w-full items-center justify-center gap-2 self-start rounded-lg bg-primary px-8 py-3 font-bold text-on-primary transition-all hover:bg-primary-container hover:text-on-primary-container active:scale-95 sm:w-max"
         >
           <svg viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5" aria-hidden>
             <path d="M3 3a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 13.75 4.51 16 6.414 16H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 5H6.28l-.31-1.243A1 1 0 005 3H3zM16 18.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
