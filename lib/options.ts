@@ -20,7 +20,7 @@ export const ACOMPANHAMENTOS = [
 
 export const CALDAS = ["Leite condensado", "Chocolate"] as const;
 
-export const FRUTAS = ["Morango"] as const;
+export const FRUTAS = ["Morango", "Banana"] as const;
 
 export const ACOMPANHAMENTOS_MIN = 1;
 export const ACOMPANHAMENTOS_MAX = 3;
