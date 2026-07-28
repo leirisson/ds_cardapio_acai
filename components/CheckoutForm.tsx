@@ -1,11 +1,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { GlassCard } from "./GlassCard";
-import { CartItem, DeliveryMethod, PaymentMethod } from "../lib/types";
-import { cartTotal } from "../lib/store/cart";
+import { CartItem, Customer, DeliveryMethod, PaymentMethod } from "../lib/types";
+import { cartTotal, itemUnitPrice } from "../lib/store/cart";
+import { deliveryFee } from "../lib/whatsapp";
 
 type CheckoutFormProps = {
   items: CartItem[];
+  customer: Customer;
   onSubmit: (deliveryMethod: DeliveryMethod, paymentMethod: PaymentMethod, changeFor?: number, notes?: string) => void;
   onBack: () => void;
 };
@@ -74,13 +76,15 @@ const paymentOptions: { id: PaymentMethod; label: string; icon: React.ReactNode 
   { id: "dinheiro", label: "Dinheiro", icon: <CashIcon /> },
 ];
 
-export function CheckoutForm({ items, onSubmit, onBack }: CheckoutFormProps) {
+export function CheckoutForm({ items, customer, onSubmit, onBack }: CheckoutFormProps) {
   const [deliveryMethod, setDeliveryMethod] = useState<DeliveryMethod>("delivery");
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("cartao");
   const [changeFor, setChangeFor] = useState("");
   const [notes, setNotes] = useState("");
 
-  const total = cartTotal(items);
+  const subtotal = cartTotal(items);
+  const fee = deliveryMethod === "delivery" ? deliveryFee(customer.endereco.bairro) : 0;
+  const total = subtotal + fee;
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -218,7 +222,7 @@ export function CheckoutForm({ items, onSubmit, onBack }: CheckoutFormProps) {
                   item.selection.sabor,
                   ...item.selection.acompanhamentos,
                   item.selection.calda,
-                  item.selection.fruta,
+                  ...item.selection.frutas,
                 ]
                   .filter(Boolean)
                   .join(", ");
@@ -241,7 +245,7 @@ export function CheckoutForm({ items, onSubmit, onBack }: CheckoutFormProps) {
                       <p className="text-sm text-on-surface-variant">Quantidade: {item.quantity}</p>
                     </div>
                     <span className="font-bold text-secondary">
-                      {formatCurrency(item.product.preco * item.quantity)}
+                      {formatCurrency(itemUnitPrice(item) * item.quantity)}
                     </span>
                   </div>
                 );
@@ -249,6 +253,16 @@ export function CheckoutForm({ items, onSubmit, onBack }: CheckoutFormProps) {
             </div>
 
             <div className="space-y-2 border-t border-surface-container-highest pt-4">
+              <div className="flex items-center justify-between text-sm text-on-surface-variant">
+                <span>Subtotal</span>
+                <span>{formatCurrency(subtotal)}</span>
+              </div>
+              {deliveryMethod === "delivery" && (
+                <div className="flex items-center justify-between text-sm text-on-surface-variant">
+                  <span>Taxa de entrega</span>
+                  <span>{fee > 0 ? formatCurrency(fee) : "Grátis (Aleixo)"}</span>
+                </div>
+              )}
               <div className="flex items-center justify-between pt-2">
                 <span className="font-display text-lg text-primary">Total</span>
                 <span className="font-display text-2xl text-secondary">{formatCurrency(total)}</span>

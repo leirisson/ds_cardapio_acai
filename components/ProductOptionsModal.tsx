@@ -8,6 +8,7 @@ import {
   ACOMPANHAMENTOS_MAX,
   ACOMPANHAMENTOS_MIN,
   CALDAS,
+  FRUTA_PRECO,
   FRUTAS,
   SABORES,
 } from "../lib/options";
@@ -44,8 +45,14 @@ export function ProductOptionsModal({ product, onConfirm, onClose }: ProductOpti
   const [sabor, setSabor] = useState<string>("");
   const [acompanhamentos, setAcompanhamentos] = useState<string[]>([]);
   const [calda, setCalda] = useState<string>("");
-  const [fruta, setFruta] = useState<string>("");
+  const [frutas, setFrutas] = useState<string[]>([]);
   const [quantity, setQuantity] = useState(1);
+
+  const toggleFruta = (item: string) => {
+    setFrutas((current) =>
+      current.includes(item) ? current.filter((entry) => entry !== item) : [...current, item]
+    );
+  };
 
   const toggleAcompanhamento = (item: string) => {
     setAcompanhamentos((current) => {
@@ -61,14 +68,15 @@ export function ProductOptionsModal({ product, onConfirm, onClose }: ProductOpti
 
   const acompanhamentosValid =
     acompanhamentos.length >= ACOMPANHAMENTOS_MIN && acompanhamentos.length <= ACOMPANHAMENTOS_MAX;
-  const isValid = sabor !== "" && acompanhamentosValid && calda !== "" && fruta !== "";
+  const isValid = sabor !== "" && acompanhamentosValid && calda !== "";
 
-  const totalPrice = useMemo(() => product.preco * quantity, [product.preco, quantity]);
+  const unitPrice = product.preco + frutas.length * FRUTA_PRECO;
+  const totalPrice = useMemo(() => unitPrice * quantity, [unitPrice, quantity]);
 
   const handleConfirm = () => {
     if (!isValid) return;
     for (let i = 0; i < quantity; i++) {
-      onConfirm({ sabor, acompanhamentos, calda, fruta });
+      onConfirm({ sabor, acompanhamentos, calda, frutas });
     }
     onClose();
   };
@@ -223,31 +231,46 @@ export function ProductOptionsModal({ product, onConfirm, onClose }: ProductOpti
           <div className="flex items-center justify-between gap-3 bg-surface-container-low px-4 py-4">
             <div>
               <h3 className="font-bold text-on-surface">Frutas</h3>
-              <p className="text-sm text-on-surface-variant">Escolha 1 opção</p>
+              <p className="text-sm text-on-surface-variant">
+                Opcional — {formatCurrency(FRUTA_PRECO)} por fruta
+              </p>
             </div>
-            <RequiredBadge done={fruta !== ""} />
           </div>
           <ul>
-            {FRUTAS.map((item) => (
-              <li key={item} className="border-b border-surface-container-high last:border-b-0">
-                <button
-                  type="button"
-                  onClick={() => setFruta(item)}
-                  className="flex w-full items-center justify-between px-4 py-4 text-left transition-colors hover:bg-surface-container-low"
-                >
-                  <span className={fruta === item ? "font-semibold text-on-surface" : "text-on-surface"}>
-                    {item}
-                  </span>
-                  <span
-                    className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
-                      fruta === item ? "border-secondary" : "border-outline-variant"
-                    }`}
+            {FRUTAS.map((item) => {
+              const checked = frutas.includes(item);
+              return (
+                <li key={item} className="border-b border-surface-container-high last:border-b-0">
+                  <button
+                    type="button"
+                    onClick={() => toggleFruta(item)}
+                    className="flex w-full items-center justify-between px-4 py-4 text-left transition-colors hover:bg-surface-container-low"
                   >
-                    {fruta === item && <span className="h-2.5 w-2.5 rounded-full bg-secondary" />}
-                  </span>
-                </button>
-              </li>
-            ))}
+                    <span className={checked ? "font-semibold text-on-surface" : "text-on-surface"}>
+                      {item}
+                      <span className="ml-2 text-xs font-normal text-on-surface-variant">
+                        + {formatCurrency(FRUTA_PRECO)}
+                      </span>
+                    </span>
+                    <span
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border-2 transition-colors ${
+                        checked
+                          ? "border-secondary bg-secondary text-on-secondary"
+                          : "border-outline-variant text-transparent"
+                      }`}
+                    >
+                      <svg viewBox="0 0 20 20" fill="currentColor" className="h-3.5 w-3.5" aria-hidden>
+                        <path
+                          fillRule="evenodd"
+                          d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </div>
 

@@ -200,10 +200,11 @@ export default function Home() {
           </div>
         )}
 
-        {step === "checkout" && (
+        {step === "checkout" && customer && (
           <div className="mx-auto w-full">
             <CheckoutForm
               items={items}
+              customer={customer}
               onSubmit={handleOrderSubmit}
               onBack={() => setStep("dados-cliente")}
             />

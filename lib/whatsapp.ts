@@ -1,5 +1,6 @@
 import { CartItem, Customer, DeliveryMethod, PaymentMethod } from "./types";
-import { cartTotal } from "./store/cart";
+import { cartTotal, itemUnitPrice } from "./store/cart";
+import { FRUTA_PRECO } from "./options";
 
 const paymentLabels: Record<PaymentMethod, string> = {
   dinheiro: "Dinheiro",
@@ -16,6 +17,12 @@ const formatCurrency = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 const DIVIDER = "------------------------------";
+
+export const TAXA_ENTREGA = 10.0;
+export const BAIRRO_SEM_TAXA = "Aleixo";
+
+export const deliveryFee = (bairro: string) =>
+  bairro.trim().toLowerCase() === BAIRRO_SEM_TAXA.toLowerCase() ? 0 : TAXA_ENTREGA;
 
 export function buildOrderMessage(
   items: CartItem[],
@@ -46,7 +53,7 @@ export function buildOrderMessage(
   lines.push(DIVIDER);
   for (const item of items) {
     lines.push(
-      `${item.quantity}x ${item.product.nome} - ${formatCurrency(item.product.preco * item.quantity)}`
+      `${item.quantity}x ${item.product.nome} - ${formatCurrency(itemUnitPrice(item) * item.quantity)}`
     );
     if (item.selection.sabor) {
       lines.push(`  Sabor: ${item.selection.sabor}`);
@@ -57,12 +64,14 @@ export function buildOrderMessage(
     if (item.selection.calda) {
       lines.push(`  Calda: ${item.selection.calda}`);
     }
-    if (item.selection.fruta) {
-      lines.push(`  Fruta: ${item.selection.fruta}`);
+    if (item.selection.frutas.length > 0) {
+      lines.push(`  Frutas: ${item.selection.frutas.join(", ")} (+${formatCurrency(FRUTA_PRECO)} cada)`);
     }
   }
   lines.push(DIVIDER);
-  lines.push(`*Total: ${formatCurrency(cartTotal(items))}*`);
+  const subtotal = cartTotal(items);
+  const fee = deliveryMethod === "delivery" ? deliveryFee(customer.endereco.bairro) : 0;
+  lines.push(`Subtotal: ${formatCurrency(subtotal)}`);
 
   lines.push("");
   lines.push(`*ENTREGA: ${deliveryLabels[deliveryMethod].toUpperCase()}*`);
@@ -71,7 +80,13 @@ export function buildOrderMessage(
     const { rua, numero, bairro, complemento, cidade } = customer.endereco;
     lines.push(`Endereço: ${rua}, ${numero} - ${bairro}${complemento ? ` (${complemento})` : ""}`);
     lines.push(`Cidade: ${cidade}`);
+    lines.push(
+      fee > 0 ? `Taxa de entrega: ${formatCurrency(fee)}` : "Taxa de entrega: Grátis (bairro Aleixo)"
+    );
   }
+
+  lines.push(DIVIDER);
+  lines.push(`*TOTAL GERAL: ${formatCurrency(subtotal + fee)}*`);
 
   lines.push("");
   lines.push(`*PAGAMENTO: ${paymentLabels[paymentMethod].toUpperCase()}*`);

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { GlassCard } from "./GlassCard";
 import { CartItem } from "../lib/types";
-import { cartTotal } from "../lib/store/cart";
+import { cartTotal, itemUnitPrice } from "../lib/store/cart";
 
 type CartDrawerProps = {
   items: CartItem[];
@@ -14,7 +14,12 @@ const formatCurrency = (value: number) =>
   value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 
 const selectionSummary = (item: CartItem) =>
-  [item.selection.sabor, ...item.selection.acompanhamentos, item.selection.calda, item.selection.fruta]
+  [
+    item.selection.sabor,
+    ...item.selection.acompanhamentos,
+    item.selection.calda,
+    ...item.selection.frutas,
+  ]
     .filter(Boolean)
     .join(", ");
 
@@ -74,7 +79,7 @@ export function CartDrawer({ items, onUpdateQuantity, onRemove, onCheckout }: Ca
               </div>
               <div className="flex flex-col items-end gap-2">
                 <span className="font-bold text-secondary">
-                  {formatCurrency(item.product.preco * item.quantity)}
+                  {formatCurrency(itemUnitPrice(item) * item.quantity)}
                 </span>
                 <button
                   type="button"

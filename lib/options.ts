@@ -24,3 +24,4 @@ export const FRUTAS = ["Morango", "Banana"] as const;
 
 export const ACOMPANHAMENTOS_MIN = 1;
 export const ACOMPANHAMENTOS_MAX = 3;
+export const FRUTA_PRECO = 5.0;

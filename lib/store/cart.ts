@@ -1,9 +1,18 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { FRUTA_PRECO } from "../options";
 import { CartItem, Product, ProductSelection } from "../types";
 
 const buildCartItemId = (product: Product, selection: ProductSelection) =>
-  [product.id, selection.calda, selection.fruta, [...selection.acompanhamentos].sort().join(",")].join("|");
+  [
+    product.id,
+    selection.calda,
+    [...selection.frutas].sort().join(","),
+    [...selection.acompanhamentos].sort().join(","),
+  ].join("|");
+
+export const itemUnitPrice = (item: CartItem) =>
+  item.product.preco + item.selection.frutas.length * FRUTA_PRECO;
 
 type CartState = {
   items: CartItem[];
@@ -52,4 +61,4 @@ export const useCartStore = create<CartState>()(
 );
 
 export const cartTotal = (items: CartItem[]) =>
-  items.reduce((sum, item) => sum + item.product.preco * item.quantity, 0);
+  items.reduce((sum, item) => sum + itemUnitPrice(item) * item.quantity, 0);
